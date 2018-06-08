@@ -6,17 +6,24 @@
 # The alexa facing logic surrounding citadel
 
 import logging
+import os
 from datetime import datetime
+
 from flask import Flask, json, render_template
 from flask_ask import Ask, request, session, question, statement
+import requests
 
 __author__ = 'Jon Robison'
 __email__ = 'narfman0@gmail.com'
 
+ENDPOINT = os.environ.get('UPDATE_ENDPOINT', 'https://citadel.aws.com/api')
+ID_TO_NAME = {
+}
 
 app = Flask(__name__)
 ask = Ask(app, '/')
 logging.getLogger("flask_ask").setLevel(logging.DEBUG)
+
 
 # Session starter
 #
@@ -57,21 +64,43 @@ def get_office(person):
     alexa> jon is working from home today
     """
     location = 'unknown'
-    # TODO use dynamodb to get user location
+    url = ENDPOINT + '/' + person
+    try:
+        data = requests.get(url, timeout=5).json()
+    except:
+        msg = 'Timeout getting ' + person + ' location.'
+        logging.warning(msg)
+        return statement(msg)
+    try:
+        location = data['location']
+    except:
+        logging.warning('Error trying to parse location for ' + person)
     text = person + ' location for today is: ' + location
     return statement(text)
 
 
-@ask.intent('SetOfficeIntent', mapping={'office': 'LOCATION'})
-def set_office(office):
+@ask.intent('SetOfficeIntent', mapping={'location': 'LOCATION'})
+def set_office(location):
     """
-    (QUESTION) Handles query responses
+    (QUESTION) Handles updating office location responses
 
     e.g.:
     jim> alexa, ask citadel where jon is today?
     alexa> jon is working from home today
     """
-    # TODO use dynamodb to set user location
+    try:
+        person = ID_TO_NAME[session.user.userId]
+    except:
+        return statement("I'm sorry, that user id is not registered. Please " +
+                         "update the alexa skill id to name dictionary.")
+    url = ENDPOINT + '/' + person + '/update/'
+    payload = {'location': location}
+    try:
+        requests.post(url, data=payload, timeout=5)
+    except:
+        msg = 'Updating ' + person + ' timeout; is your endpoint ok?'
+        logging.warning(msg)
+        return statement(msg)
     text = 'Your location is updated to ' + office
     return statement(text)
 
