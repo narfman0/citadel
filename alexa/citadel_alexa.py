@@ -47,6 +47,36 @@ def handle_launch():
     return statement("Welcome to citadel! Please use get or set office intents.")
 
 
+@ask.intent('GetOfficeIntent', mapping={'person': 'PERSON'})
+def get_office(person):
+    """
+    (QUESTION) Handles query responses
+
+    e.g.:
+    jim> alexa, ask citadel where jon is today?
+    alexa> jon is working from home today
+    """
+    location = 'unknown'
+    # TODO use dynamodb to get user location
+    text = person + ' location for today is: ' + location
+    return statement(text)
+
+
+@ask.intent('SetOfficeIntent', mapping={'office': 'LOCATION'})
+def set_office(office):
+    """
+    (QUESTION) Handles query responses
+
+    e.g.:
+    jim> alexa, ask citadel where jon is today?
+    alexa> jon is working from home today
+    """
+    # TODO use dynamodb to set user location
+    text = 'Your location is updated to ' + office
+    return statement(text)
+
+
+
 # Built-in intents
 #
 # These intents are built-in intents. Conveniently, built-in intents do not need you to define utterances, so you can
@@ -54,6 +84,24 @@ def handle_launch():
 # or delete them/comment them out.
 #
 # More about built-in intents: http://d.pr/KKyx
+
+@ask.intent('AMAZON.StopIntent')
+def handle_stop():
+    """
+    (STATEMENT) Handles the 'stop' built-in intention.
+    """
+    farewell_text = render_template('stop_bye')
+    return statement(farewell_text)
+
+
+@ask.intent('AMAZON.CancelIntent')
+def handle_cancel():
+    """
+    (STATEMENT) Handles the 'cancel' built-in intention.
+    """
+    farewell_text = render_template('cancel_bye')
+    return statement(farewell_text)
+
 
 @ask.intent('AMAZON.HelpIntent')
 def handle_help():

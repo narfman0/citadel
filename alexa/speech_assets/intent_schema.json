@@ -5,9 +5,6 @@
       "slots": [{
           "name": "name",
           "type": "PERSON"
-      },{
-          "name": "office",
-          "type": "LOCATION"
       }]
     },
     {
