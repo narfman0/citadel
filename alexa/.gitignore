@@ -84,3 +84,4 @@ pip-selfcheck.json
 test_*.json
 test_*.xml
 Pipfile
+Pipfile.lock
