@@ -24,6 +24,10 @@ with open(os.environ.get('ID_TO_NAME_PATH', DEFAULT_ID_TO_NAME_PATH)) as json_da
 app = Flask(__name__)
 ask = Ask(app, '/')
 logging.getLogger("flask_ask").setLevel(logging.DEBUG)
+try:
+    from settings import *
+except ImportError:
+    logging.debug('No settings found, skipping')
 
 
 # Session starter
