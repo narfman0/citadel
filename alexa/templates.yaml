@@ -1,0 +1,6 @@
+getoffice_response: <name> is currently in <office>
+
+setoffice_response: Your new citadel location is <office>
+
+help_text: |
+  citadel-alexa is an Alexa skill to manage citadel location. You may set office or get office of a peer.

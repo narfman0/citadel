@@ -1,0 +1,21 @@
+{
+  "intents": [
+    {
+      "intent": "GetOfficeIntent",
+      "slots": [{
+          "name": "name",
+          "type": "PERSON"
+      },{
+          "name": "office",
+          "type": "LOCATION"
+      }]
+    },
+    {
+      "intent": "SetOfficeIntent",
+      "slots": [{
+          "name": "office",
+          "type": "LOCATION"
+      }]
+    }
+  ]
+}

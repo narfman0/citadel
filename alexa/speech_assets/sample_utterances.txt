@@ -1,0 +1,9 @@
+GetOfficeIntent where is Jim today?
+GetOfficeIntent from where is Jim today?
+GetOfficeIntent where is Jim working today?
+GetOfficeIntent from where is Jim working today?
+
+SetOfficeIntent I am working from home today.
+SetOfficeIntent I am working from the office today.
+SetOfficeIntent I am working from client site.
+SetOfficeIntent I am working from client site forever.
