@@ -1,4 +1,4 @@
-service: citadel_alexa
+service: citadelalexa
 
 custom:
   wsgi:
