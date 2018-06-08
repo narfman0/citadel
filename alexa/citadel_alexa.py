@@ -17,8 +17,9 @@ __author__ = 'Jon Robison'
 __email__ = 'narfman0@gmail.com'
 
 ENDPOINT = os.environ.get('UPDATE_ENDPOINT', 'https://citadel.aws.com/api')
-ID_TO_NAME = {
-}
+DEFAULT_ID_TO_NAME_PATH = os.path.join(os.path.expanduser('~'), '.config/idToName.json')
+with open(os.environ.get('ID_TO_NAME_PATH', DEFAULT_ID_TO_NAME_PATH)) as json_data:
+    ID_TO_NAME = json.load(json_data)
 
 app = Flask(__name__)
 ask = Ask(app, '/')
