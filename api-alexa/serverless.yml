@@ -1,0 +1,45 @@
+service: citadel-alexa-api
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+# TODO configure DynamoDB table IAM Role.
+#  environment:
+#      DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+#    iamRoleStatements:
+#      - Effect: Allow
+#        Action:
+#          - dynamodb:Query
+#          - dynamodb:Scan
+#          - dynamodb:GetItem
+#          - dynamodb:PutItem
+#          - dynamodb:UpdateItem
+#          - dynamodb:DeleteItem
+#        Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+functions:
+  update:
+    handler: status/update.update
+    description: handles a citadel stats update API call from Alexa.
+    events:
+      - http:
+        path: status
+        method: post
+        cors: true
+    tags:
+      Name: "Citadel"
+      Owner: "ryan.bruun@cloudreach.com"
+      Purpose: "Citadel/Skunkworks"
+
+  get:
+      handler: status/get.get
+      description: handles a citadel get status API call from Alexa.
+      events:
+        - http:
+            path: status/get
+            method: get
+            cors: true
+      tags:
+        Name: "Citadel"
+        Owner: "ryan.bruun@cloudreach.com"
+        Purpose: "Citadel/Skunkworks"
