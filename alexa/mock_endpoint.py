@@ -4,7 +4,7 @@ app = Flask(__name__)
 people_locations = {}
 
 
-@app.route('/<name>', methods=['GET',])
+@app.route('/<name>/', methods=['GET',])
 def get_office(name):
     data = {
         'location': people_locations[name]
@@ -12,10 +12,9 @@ def get_office(name):
     return jsonify(data)
 
 
-@app.route('/<name>/update', methods=['POST',])
+@app.route('/<name>/update/', methods=['POST',])
 def set_office(name):
-    # TODO this is coming in as some sort of binary blob, FIXME
-    people_locations[name] = request.json['location']
+    people_locations[name] = request.form['location']
     return jsonify({'status': 'success'})
 
 

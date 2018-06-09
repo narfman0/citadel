@@ -111,7 +111,7 @@ def set_office(location):
         msg = 'Updating ' + person + ' timeout; is your endpoint ok?'
         logging.warning(msg)
         return statement(msg)
-    text = 'Your location is updated to ' + office
+    text = 'Your location is updated to ' + location
     return statement(text)
 
 
