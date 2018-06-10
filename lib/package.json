@@ -1,10 +1,16 @@
 {
-  "name": "api",
+  "name": "lib",
   "version": "1.0.0",
   "description": "",
-  "main": "handler.js",
+  "main": "Offices.js",
+  "directories": {
+    "test": "tests"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "coverage": "jest --coverage",
+    "lint": "eslint --config ../.eslintrc.json --fix *.js",
+    "pretest": "npm run lint",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +22,6 @@
   "dependencies": {
     "aws-sdk": "^2.254.1",
     "statuses": "^1.5.0",
-    "uuid": "latest"
+    "uuid": "^3.2.1"
   }
 }

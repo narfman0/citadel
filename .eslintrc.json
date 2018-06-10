@@ -1,3 +1,6 @@
 {
-  "extends": "cloudreach/es6"
+  "extends": "cloudreach/es6",
+  "parserOptions": {
+    "ecmaVersion": 2017
+  }
 }

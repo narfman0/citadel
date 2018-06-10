@@ -3,28 +3,25 @@ service: citadel-slack-api
 provider:
   name: aws
   runtime: nodejs8.10
-# TODO update DynamoDB table IAM Role.
-#  environment:
-#      DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
-#    iamRoleStatements:
-#      - Effect: Allow
-#        Action:
-#          - dynamodb:Query
-#          - dynamodb:Scan
-#          - dynamodb:GetItem
-#          - dynamodb:PutItem
-#          - dynamodb:UpdateItem
-#          - dynamodb:DeleteItem
-#        Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+  environment:
+    DYNAMODB_TABLE: citadel_table
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:Query
+          - dynamodb:Scan
+          - dynamodb:GetItem
+          - dynamodb:PutItem
+          - dynamodb:UpdateItem
+          - dynamodb:DeleteItem
+        Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
 
 functions:
   update:
     handler: status/update.update
     description: Handles a citadel status/update API call from Slack.
     events:
-      - http:
-        path: status/update
-        method: post
+      - http: post status/update
         cors: true
     tags:
       Name: "Citadel"
@@ -35,9 +32,7 @@ functions:
       handler: status/get.get
       description: Handles a citadel POST status/get API call from Slack.
       events:
-        - http:
-          path: status/get
-          method: post  # Slack only sends POSTS.
+        - http: post status/get
           cors: true
       tags:
         Name: "Citadel"
