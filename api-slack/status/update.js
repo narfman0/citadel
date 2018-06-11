@@ -15,6 +15,7 @@ module.exports.update = async (event) => {
   try {
     const user = await users.getUserBySlackId(event.slackId);
     const office = await offices.getOfficeBySlackChannel(event.slackChannel);
+    await users.updateUserCurrentOffice(user.id, office.id);
     // TODO package response for Slack.
     return statuses.updateUserOfficeStatus(user.id, office.id, event.status);
 

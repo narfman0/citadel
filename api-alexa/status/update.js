@@ -13,8 +13,10 @@ module.exports.update = async (event) => {
   console.info(`update event: ${JSON.stringify(event, null, 2)}`);
 
   try {
+
     const user = await users.getUserByAlexaId(event.alexaUserId);
     const office = await offices.getOfficeByAlexaRoomId(event.alexaRoomId);
+    await users.updateUserCurrentOffice(user.id, office.id);
     // TODO package response for Slack.
     return statuses.updateUserOfficeStatus(user.id, office.id, event.status);
 
