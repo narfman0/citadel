@@ -4,6 +4,7 @@ provider:
   name: aws
   runtime: nodejs8.10
   environment:
+  # TODO Need to update this with correct DynamoTable info.
       DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
     iamRoleStatements:
       - Effect: Allow
@@ -21,7 +22,7 @@ functions:
     handler: status/update.update
     description: handles a citadel stats update API call from Alexa.
     events:
-      - http: post status
+      - http: POST status
         cors: true
     tags:
       Name: "Citadel"
@@ -32,7 +33,7 @@ functions:
       handler: status/get.get
       description: handles a citadel get status API call from Alexa.
       events:
-        - http: get status/get
+        - http: GET status/{alexaId}
             cors: true
       tags:
         Name: "Citadel"
