@@ -1,24 +1,23 @@
 'use strict';
 
-const db = require('../../lib/Users');
-const response = ('../../lib/response');
+const UserOfficeStatuses = require('../../lib/UserOfficeStatuses');
+const Users = require('../../lib/Users');
 
-module.exports.get = async (event, context) => {
+const users = new Users();
+const statuses = new UserOfficeStatuses();
+
+module.exports.get = async (event) => {
+
+  console.info(`get event: ${JSON.stringify(event, null, 2)}`);
 
   try {
-    const params = {
-      TableName: process.env.TableName,
-      Key: {
-        id: event.pathParameters.id
-      }
-    };
+    const user = await users.getUserByAlexaId(event.alexaUserId);
+    const status = await statuses.getUserOfficeStatusByUserId(user.id);
 
-    // TODO implement get method.
-    let data = await db.get(params);
-
-    return response.success(data);
+    // TODO package status in a response for Alexa.
+    return status;
 
   } catch (e) {
-    console.error(`${JSON.stringify(e)}`)
+    console.error(`${JSON.stringify(e)}`);
   }
 };

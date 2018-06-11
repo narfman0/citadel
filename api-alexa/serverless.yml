@@ -33,7 +33,7 @@ functions:
       handler: status/get.get
       description: handles a citadel get status API call from Alexa.
       events:
-        - http: GET status/{alexaId}
+        - http: GET status/{alexaUserId}
             cors: true
       tags:
         Name: "Citadel"
