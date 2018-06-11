@@ -1,0 +1,164 @@
+{
+    "ok": true,
+    "channels": [
+        {
+            "id": "CB4C02M1A",
+            "name": "general",
+            "is_channel": true,
+            "created": 1528516943,
+            "is_archived": false,
+            "is_general": true,
+            "unlinked": 0,
+            "creator": "UB4JM4YBU",
+            "name_normalized": "general",
+            "is_shared": false,
+            "is_org_shared": false,
+            "is_member": true,
+            "is_private": false,
+            "is_mpim": false,
+            "members": [
+                "UB47LNPQR",
+                "UB4CBHL7K",
+                "UB4JM4YBU"
+            ],
+            "topic": {
+                "value": "Company-wide announcements and work-based matters",
+                "creator": "UB4JM4YBU",
+                "last_set": 1528516943
+            },
+            "purpose": {
+                "value": "This channel is for workspace-wide communication and announcements. All members are in this channel.",
+                "creator": "UB4JM4YBU",
+                "last_set": 1528516943
+            },
+            "previous_names": [],
+            "num_members": 3
+        },
+        {
+            "id": "CB4JMB0AE",
+            "name": "of-norfolk",
+            "is_channel": true,
+            "created": 1528517028,
+            "is_archived": false,
+            "is_general": false,
+            "unlinked": 0,
+            "creator": "UB4JM4YBU",
+            "name_normalized": "of-norfolk",
+            "is_shared": false,
+            "is_org_shared": false,
+            "is_member": true,
+            "is_private": false,
+            "is_mpim": false,
+            "members": [
+                "UB4JM4YBU"
+            ],
+            "topic": {
+                "value": "",
+                "creator": "",
+                "last_set": 0
+            },
+            "purpose": {
+                "value": "Where people are",
+                "creator": "UB4JM4YBU",
+                "last_set": 1528517028
+            },
+            "previous_names": [],
+            "num_members": 1
+        },
+        {
+            "id": "CB4C06WCU",
+            "name": "of-remote",
+            "is_channel": true,
+            "created": 1528517006,
+            "is_archived": false,
+            "is_general": false,
+            "unlinked": 0,
+            "creator": "UB4JM4YBU",
+            "name_normalized": "of-remote",
+            "is_shared": false,
+            "is_org_shared": false,
+            "is_member": true,
+            "is_private": false,
+            "is_mpim": false,
+            "members": [
+                "UB4JM4YBU"
+            ],
+            "topic": {
+                "value": "",
+                "creator": "",
+                "last_set": 0
+            },
+            "purpose": {
+                "value": "Remote Employees",
+                "creator": "UB4JM4YBU",
+                "last_set": 1528517006
+            },
+            "previous_names": [],
+            "num_members": 1
+        },
+        {
+            "id": "CB5FDQN2J",
+            "name": "of-scarif",
+            "is_channel": true,
+            "created": 1528517018,
+            "is_archived": false,
+            "is_general": false,
+            "unlinked": 0,
+            "creator": "UB4JM4YBU",
+            "name_normalized": "of-scarif",
+            "is_shared": false,
+            "is_org_shared": false,
+            "is_member": true,
+            "is_private": false,
+            "is_mpim": false,
+            "members": [
+                "UB4JM4YBU"
+            ],
+            "topic": {
+                "value": "",
+                "creator": "",
+                "last_set": 0
+            },
+            "purpose": {
+                "value": "It's gonna get blowed up",
+                "creator": "UB4JM4YBU",
+                "last_set": 1528517019
+            },
+            "previous_names": [],
+            "num_members": 1
+        },
+        {
+            "id": "CB3THAXCY",
+            "name": "random",
+            "is_channel": true,
+            "created": 1528516943,
+            "is_archived": false,
+            "is_general": false,
+            "unlinked": 0,
+            "creator": "UB4JM4YBU",
+            "name_normalized": "random",
+            "is_shared": false,
+            "is_org_shared": false,
+            "is_member": true,
+            "is_private": false,
+            "is_mpim": false,
+            "members": [
+                "UB47LNPQR",
+                "UB4CBHL7K",
+                "UB4JM4YBU"
+            ],
+            "topic": {
+                "value": "Non-work banter and water cooler conversation",
+                "creator": "UB4JM4YBU",
+                "last_set": 1528516943
+            },
+            "purpose": {
+                "value": "A place for non-work-related flimflam, faffing, hodge-podge or jibber-jabber you'd prefer to keep out of more focused work-related channels.",
+                "creator": "UB4JM4YBU",
+                "last_set": 1528516943
+            },
+            "previous_names": [],
+            "num_members": 3
+        }
+    ]
+}
