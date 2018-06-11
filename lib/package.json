@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "aws-sdk": "^2.254.1",
-    "statuses": "^1.5.0",
-    "uuid": "^3.2.1"
+    "statuses": "^1.5.0"
   }
 }
