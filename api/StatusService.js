@@ -42,8 +42,8 @@ class StatusService {
     const params = {
       TableName: this.TABLE_NAME,
       Item: {
-        user_id: userId,
-        office_id: officeId,
+        userId: userId,
+        officeId: officeId,
         status: status
       }
     };
