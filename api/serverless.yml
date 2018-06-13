@@ -1,0 +1,184 @@
+service: citadel-api
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline  # this plugin must be listed last.
+
+custom:
+  dynamoDb:
+    start:
+      migrate: true
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: us-east-1
+  environment:
+    CITADEL_SLACK_USER_NAME: Citadel
+    DYNAMODB_OFFICE_TABLE: ${self:service}-office-${opt:stage, self:provider.stage}
+    DYNAMODB_STATUS_TABLE: ${self:service}-status-${opt:stage, self:provider.stage}
+    DYNAMODB_USER_TABLE: ${self:service}-users-${opt:stage, self:provider.stage}
+    SLACK_API_ENDPOINT: https://slack.com/api/
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_OFFICE_TABLE}"
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_STATUS_TABLE}"
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_USER_TABLE}"
+
+functions:
+  alexaGetStatus:
+    handler: index.handler
+    description: Gets a status by slackId.
+    events:
+      - http: 'GET alexa/status/{proxy+}'
+    tags:
+      Name: Ryan Bruun
+      Owner: ryan.bruun@cloudreach.com
+      Description: Citadel.
+      Purpose: Skunkworks
+  alexaUpdateStatus:
+    handler: index.handler
+    description:
+    events:
+      - http: 'POST alexa/status'
+    tags:
+      Owner: ryan.bruun@cloudreach.com
+      Description: Citadel.
+      Purpose: Skunkworks
+  slackGetStatus:
+    handler: index.handler
+    description: Gets a status by slackId.
+    events:
+      - http: 'POST slack/status/{proxy+}'
+    tags:
+      Name: Ryan Bruun
+      Owner: ryan.bruun@cloudreach.com
+      Description: Citadel.
+      Purpose: Skunkworks
+  slackUpdateUser:
+    handler: index.handler
+    description: Update a user's status.
+    events:
+      - http: 'POST slack/status'
+    tags:
+      Name: Ryan Bruun
+      Owner: ryan.bruun@cloudreach.com
+      Description: Citadel.
+      Purpose: Skunkworks
+
+resources:
+  Resources:
+    OfficeTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.DYNAMODB_OFFICE_TABLE}
+        AttributeDefinitions:
+          -
+            AttributeName: "officeId"
+            AttributeType: "S"
+        KeySchema:
+          -
+            AttributeName: "officeId"
+            KeyType: "HASH"
+        ProvisionedThroughput:
+          ReadCapacityUnits: "5"
+          WriteCapacityUnits: "5"
+        Tags:
+          -
+            Key: "Name"
+            Value: "Ryan Bruun"
+          -
+            Key: "OWNER"
+            Value: "ryan.bruun@cloudreach.com"
+          -
+            Key: "Purpose"
+            Value: "Skunkworks"
+          -
+            Key: "KillDate"
+            Value: "15/06/2018"
+    UserOfficeStatusTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.DYNAMODB_STATUS_TABLE}
+        AttributeDefinitions:
+          -
+            AttributeName: "userId"
+            AttributeType: "S"
+          -
+            AttributeName: "officeId"
+            AttributeType: "S"
+        KeySchema:
+          -
+            AttributeName: "userId"
+            KeyType: "HASH"
+          -
+            AttributeName: "officeId"
+            KeyType: "RANGE"
+        ProvisionedThroughput:
+          ReadCapacityUnits: "5"
+          WriteCapacityUnits: "5"
+        Tags:
+          -
+            Key: "Name"
+            Value: "Ryan Bruun"
+          -
+            Key: "Owner"
+            Value: "ryan.bruun@cloudreach.com"
+          -
+            Key: "Purpose"
+            Value: "Skunkworks"
+          -
+            Key: "KillDate"
+            Value: "15/06/2018"
+    UsersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.DYNAMODB_USER_TABLE}
+        AttributeDefinitions:
+          -
+            AttributeName: "userId"
+            AttributeType: "S"
+        KeySchema:
+          -
+            AttributeName: "userId"
+            KeyType: "HASH"
+        ProvisionedThroughput:
+          ReadCapacityUnits: "5"
+          WriteCapacityUnits: "5"
+        Tags:
+          -
+            Key: "Name"
+            Value: "Ryan Bruun"
+          -
+            Key: "Owner"
+            Value: "ryan.bruun@cloudreach.com"
+          -
+            Key: "Purpose"
+            Value: "Skunkworks"
+          -
+            Key: "KillDate"
+            Value: "15/06/2018"

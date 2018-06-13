@@ -1,29 +1,31 @@
 'use strict';
 
-const AWS = require('aws-sdk');
-
+const dynamodb = require('serverless-dynamodb-client').doc;
 // UserOfficeStatuses
 //   UserId,OfficeId: Status
 
 /**
- *
+ * A Status service.
  */
-class UserOfficeStatuses {
+class StatusService {
 
-  constructor(db = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'})) {
+  constructor(db = dynamodb) {
     this.db = db;
     this.TABLE_NAME = process.env.USER_OFFICE_STATUS_TABLE;
   }
 
   /**
+   * Gets a Status by userId.
    *
-   * @param userId
+   * @param userId the userId of the user.
    * @returns {Promise<*>}
    */
-  async getUserOfficeStatusByUserId(userId) {
-    // TODO implement getUserOfficeStatusByUserId
+  async getStatusByUserId(userId) {
     const params = {
-      TableName: this.TABLE_NAME
+      TableName: this.TABLE_NAME,
+      Key: {
+        userId: userId
+      }
     };
 
     return this.db.get(params).promise();
@@ -36,8 +38,7 @@ class UserOfficeStatuses {
    * @param status
    * @returns {Promise<*>}
    */
-  async updateUserOfficeStatus(userId, officeId, status) {
-    // TODO implement updateUserOfficeStatus
+  async updateStatus(userId, officeId, status) {
     const params = {
       TableName: this.TABLE_NAME,
       Item: {
@@ -51,4 +52,5 @@ class UserOfficeStatuses {
   }
 }
 
-module.exports.UserOfficeStatus = UserOfficeStatuses;
+module.exports.UserOfficeStatus = StatusService;
+

@@ -1,0 +1,32 @@
+{
+  "name": "citadel-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "offline-start": "npx serverless offline start --migrate",
+    "deploy": "npx serverless deploy --verbose",
+    "lint": "eslint --fix *.js",
+    "pretest": "run npm lint",
+    "remove": "npx serverless remove --verbose",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-cloudreach": "^1.0.0",
+    "jest": "^23.1.0",
+    "serverless-dynamodb-local": "^0.2.30",
+    "serverless-offline": "^3.25.4"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.254.1",
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "serverless-dynamodb-client": "0.0.2",
+    "serverless-http": "^1.5.5"
+  }
+}
