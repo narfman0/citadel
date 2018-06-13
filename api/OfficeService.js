@@ -3,8 +3,8 @@
 const dynamodb = require('serverless-dynamodb-client').doc;
 // Office:
 //   OfficeId
-//   Slack Channel
-//   Alexa Room Id
+//   SlackChannel
+//   AlexaRoomId
 
 /**
  *
@@ -17,6 +17,7 @@ class OfficeService {
   }
 
   /**
+   * Gets an Office object by it's Alexa room Id.
    *
    * @param alexaRoomId
    * @returns {Promise<*>}
